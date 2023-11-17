@@ -1,0 +1,10 @@
+bin/
+.DS_Store
+.sfdx
+.project
+.salesforce
+.settings
+node_modules
+.ideas
+.vscode/settings.json
+.vscode/settings.json

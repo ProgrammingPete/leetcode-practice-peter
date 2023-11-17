@@ -1,8 +1,5 @@
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
-import java.util.Stack;
 
 public class Solution {
     public static void main(String[] args) throws Exception {
