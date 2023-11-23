@@ -1,9 +1,11 @@
 package neetcode.io.graphs;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
 
@@ -123,5 +125,21 @@ public class Solution {
         } else {
             return -1;
         }
+    }
+
+    public Node cloneGraph(Node node) {
+        Map<Integer, Node> map = new HashMap<>();
+        return dfs(node, map);
+    }
+
+    public Node dfs(Node node, Map<Integer, Node> map) {
+        if(node == null) return null;
+        if(map.containsKey(node.val)) return map.get(node.val);
+        Node deepCopy = new Node(node.val);
+        map.put(node.val, deepCopy);
+        for(Node neighbor : node.neighbors) {
+            deepCopy.neighbors.add(dfs(neighbor, map));
+        }
+        return deepCopy;
     }
 }
