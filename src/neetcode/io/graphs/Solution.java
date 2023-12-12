@@ -181,4 +181,8 @@ public class Solution {
                 // add to the topological sort here
                 return true;
     }
+
+    public int[] findOrder(int numCourses, int[][] prerequisites) {
+        return null;
+    }
 }
