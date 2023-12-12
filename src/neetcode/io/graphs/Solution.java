@@ -156,29 +156,29 @@ public class Solution {
         Set<Integer> visited = new HashSet<>();
         Set<Integer> path = new HashSet<>();
         for(int i = 0; i < numCourses; i++) {
-            courseFinishDfs(i, visited, path, canFinish, adjList);
-            if(!canFinish) break;
+            if(!courseFinishDfs(i, visited, path, adjList)) return false;
+           
         }
         // reverse the topoloicat sort list here
         return canFinish;
     }
 
-    private void courseFinishDfs(int i, Set<Integer> visited, Set<Integer> path, boolean canFinish,
-            Map<Integer, List<Integer>> adjList) {
+    private boolean courseFinishDfs(int i, Set<Integer> visited, Set<Integer> path, Map<Integer, List<Integer>> adjList) {
                 if(path.contains(i)) {
-                    canFinish = false;
-                    return;
+                    return false;
                 }
                 if(visited.contains(i)){
-                    return;
+                    return true;
                 }
                 visited.add(i);
-
+                path.add(i);
+                
                 for(int neighbor : adjList.get(i)) {
-                    path.add(neighbor);
-                    courseFinishDfs(neighbor, visited, path, canFinish, adjList);
-                    path.remove(neighbor);
+                    if(!courseFinishDfs(neighbor, visited, path, adjList)) return false;
                 }
+
+                path.remove(i);
                 // add to the topological sort here
+                return true;
     }
 }
