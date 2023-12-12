@@ -1,5 +1,7 @@
 package neetcode.io.graphs;
 
+import static org.junit.Assert.assertFalse;
+
 import org.junit.jupiter.api.Test;
 
 /**
@@ -45,8 +47,13 @@ All the pairs prerequisites[i] are unique.
  * 
  */
 public class CourseScheduleTest {
+    Solution sol = new Solution();
     @Test
     void testCanFinish() {
-
+        int[][] prerequisites = new int[][]{
+            {0,1},
+            {1,0}
+        };
+        assertFalse(sol.canFinish(2, prerequisites));
     }
 }

@@ -142,4 +142,43 @@ public class Solution {
         }
         return deepCopy;
     }
+
+    public boolean canFinish(int numCourses, int[][] prerequisites) {
+        Map<Integer, List<Integer>> adjList = new HashMap<>();
+        for(int i = 0; i < numCourses; i++) {
+            adjList.put(i, new ArrayList<>());
+        }
+        for(int[] pre : prerequisites) {
+            adjList.get(pre[0]).add(pre[1]);
+        }
+
+        boolean canFinish = true;
+        Set<Integer> visited = new HashSet<>();
+        Set<Integer> path = new HashSet<>();
+        for(int i = 0; i < numCourses; i++) {
+            courseFinishDfs(i, visited, path, canFinish, adjList);
+            if(!canFinish) break;
+        }
+        // reverse the topoloicat sort list here
+        return canFinish;
+    }
+
+    private void courseFinishDfs(int i, Set<Integer> visited, Set<Integer> path, boolean canFinish,
+            Map<Integer, List<Integer>> adjList) {
+                if(path.contains(i)) {
+                    canFinish = false;
+                    return;
+                }
+                if(visited.contains(i)){
+                    return;
+                }
+                visited.add(i);
+
+                for(int neighbor : adjList.get(i)) {
+                    path.add(neighbor);
+                    courseFinishDfs(neighbor, visited, path, canFinish, adjList);
+                    path.remove(neighbor);
+                }
+                // add to the topological sort here
+    }
 }
