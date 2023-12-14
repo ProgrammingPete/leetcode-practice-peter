@@ -1,5 +1,8 @@
 package neetcode.io.graphs;
 
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
 /**
@@ -46,8 +49,27 @@ All the pairs [ai, bi] are distinct.
  * 
  */
 public class CourseSchedule2Test {
+    Solution sol = new Solution();
     @Test
     void testFindOrder() {
-
+        int[][] prerequisites = new int[][] {
+            {1,0}
+        };
+        int[] expected = new int[] {0,1};
+        assertArrayEquals(expected, sol.findOrder(2, prerequisites));
+    }
+        @Test
+    void testFindOrder2() {
+        int[][] prerequisites = new int[][] {
+            {1,0},{2,0},{3,1},{3,2}
+        };
+        int[] expected = new int[] {0,2,1,3};
+        assertArrayEquals(expected, sol.findOrder(4, prerequisites));
+    }
+        @Test
+    void testFindOrder3() {
+        int[][] prerequisites = new int[][]{};
+        int[] expected = new int[] {0};
+        assertArrayEquals(expected, sol.findOrder(1, prerequisites));
     }
 }
