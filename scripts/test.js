@@ -2,7 +2,11 @@ const fs = require('fs');
 const { IgApiClient } = require('instagram-private-api');
 
 const ig = new IgApiClient();
+const YOUR_USER_NAME = process.env.IG_USERNAME
+console.log(YOUR_USER_NAME)
+const YOUR_PASS = process.env.IG_PASSWORD
 
+const TARGET_ACCOUNT_USERNAME = 'graceguandu';
 // Load previous run data
 let previousData = {};
 try {
@@ -13,11 +17,12 @@ try {
 
 (async () => {
     // Log in to Instagram
-    ig.state.generateDevice('your_username');
-    await ig.account.login('your_username', 'your_password');
-
+    const device = ig.state.generateDevice(YOUR_USER_NAME);
+    console.log("generateDevice: " + device)
+    const auth = await ig.account.login(YOUR_USER_NAME, YOUR_PASS);
+    console.log(auth);
     // Fetch follower and following lists
-    const accountId = await ig.user.getIdByUsername('target_account_username');
+    const accountId = await ig.user.getIdByUsername(TARGET_ACCOUNT_USERNAME);
     const followersFeed = ig.feed.accountFollowers(accountId);
     const followingFeed = ig.feed.accountFollowing(accountId);
 
@@ -27,8 +32,8 @@ try {
     ]);
 
     // Fetch followers and followings of target account
-    const targetFollowersFeed = ig.feed.accountFollowers(await ig.user.getIdByUsername('your_username'));
-    const targetFollowingFeed = ig.feed.accountFollowing(await ig.user.getIdByUsername('your_username'));
+    const targetFollowersFeed = ig.feed.accountFollowers(await ig.user.getIdByUsername(YOUR_USER_NAME));
+    const targetFollowingFeed = ig.feed.accountFollowing(await ig.user.getIdByUsername(YOUR_USER_NAME));
 
     const [targetFollowers, targetFollowing] = await Promise.all([
         targetFollowersFeed.items(),
