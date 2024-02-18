@@ -3,7 +3,6 @@ package neetcode.io.arrays;
 import static org.junit.Assert.assertEquals;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
