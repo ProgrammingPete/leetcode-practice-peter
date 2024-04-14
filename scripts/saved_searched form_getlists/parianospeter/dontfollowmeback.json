@@ -1,16 +1,24 @@
 {
     "dontFollowMeBack": [
         {
+            "username": "kinezalexia",
+            "full_name": "Neza"
+        },
+        {
+            "username": "howeverythingworks",
+            "full_name": "How Everything Works"
+        },
+        {
+            "username": "ktshieldsphotos",
+            "full_name": "Pittsburgh Photographer - Katie Shields"
+        },
+        {
             "username": "morningbrew",
             "full_name": "Morning Brew"
         },
         {
-            "username": "celexo_",
-            "full_name": "cece"
-        },
-        {
             "username": "weddingwaycreative",
-            "full_name": "WEDDING WAY | Wedding Content Creator"
+            "full_name": "Gillian | Wedding Content Creator"
         },
         {
             "username": "kinoyves",
@@ -19,30 +27,6 @@
         {
             "username": "panicarian",
             "full_name": "Pan Icarian"
-        },
-        {
-            "username": "parth.shahhhhhh",
-            "full_name": "Parth Shah"
-        },
-        {
-            "username": "avagracezphotography",
-            "full_name": "ohio based destination photographer ♡"
-        },
-        {
-            "username": "luvyounani",
-            "full_name": "nani ʚ♡⃛ɞ"
-        },
-        {
-            "username": "youmatter",
-            "full_name": ""
-        },
-        {
-            "username": "chamarrai",
-            "full_name": "Miss Northern OHIO."
-        },
-        {
-            "username": "noboundaries.tv",
-            "full_name": "No Boundaries Podcast"
         },
         {
             "username": "jeffbezos",
@@ -61,14 +45,6 @@
             "full_name": "Milestone Athletic Club"
         },
         {
-            "username": "ikarianstar",
-            "full_name": "Stella Chacalos"
-        },
-        {
-            "username": "echoyuxinyan",
-            "full_name": "Xinyan"
-        },
-        {
             "username": "phakenewz",
             "full_name": ""
         },
@@ -77,12 +53,8 @@
             "full_name": "Beth Romig"
         },
         {
-            "username": "jenna_rouse",
-            "full_name": "Jenna Rouse"
-        },
-        {
-            "username": "vincenerone",
-            "full_name": "Vince Nerone"
+            "username": "erikayasminx33",
+            "full_name": "Erika GG"
         },
         {
             "username": "jordan.b.peterson",
@@ -105,24 +77,8 @@
             "full_name": "Larry"
         },
         {
-            "username": "kanyewest",
-            "full_name": "Ye"
-        },
-        {
             "username": "jhharrison92",
             "full_name": "𝘑𝘢𝘮𝘦𝘴 𝘏𝘢𝘳𝘳𝘪𝘴𝘰𝘯"
-        },
-        {
-            "username": "samantha_liftss",
-            "full_name": "Samantha"
-        },
-        {
-            "username": "taylorslovasky",
-            "full_name": "Taylor Slovasky"
-        },
-        {
-            "username": "konstantinos_revelas",
-            "full_name": "Konstantínos Jordan Révelas"
         },
         {
             "username": "eva_tsengas14",
@@ -135,10 +91,6 @@
         {
             "username": "kidcudi",
             "full_name": "Willis"
-        },
-        {
-            "username": "tygaumer",
-            "full_name": "Tyler Gaumer"
         }
     ]
 }
