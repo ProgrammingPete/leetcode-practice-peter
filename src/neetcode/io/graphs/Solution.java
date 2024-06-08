@@ -185,4 +185,55 @@ public class Solution {
     public int[] findOrder(int numCourses, int[][] prerequisites) {
         return null;
     }
+
+    public int numEnclaves(int[][] grid) {
+        int ROWS = grid.length;
+        int COLS = grid[0].length;
+        int result = 0;
+        int[][] visited = new int[ROWS][COLS];
+        Queue<Coordinate> queue = new LinkedList<>();
+        
+        for(int i = 0; i < ROWS; i++) {
+            for(int j = 0; j < COLS; j++){
+                // traverse the border only and add the land ones to the queue
+                if(grid[i][j] == 1 && (i == 0 || i == (ROWS - 1) || j == 0 || j == (COLS - 1))) { 
+                    visited[i][j] = 1;
+                    queue.add(new Coordinate(i, j));
+                }
+            }
+        }
+        
+        // use BFS to mark all 1s connted to the border 1 as visited. We will use the visited matrix to determine 1s 
+        // that are not part a border land
+        while(!queue.isEmpty()) {
+            Coordinate current = queue.poll();
+            Coordinate[] neighbors = new Coordinate[] {
+                new Coordinate(current.row + 1, current.col), //right neighbor
+                new Coordinate(current.row - 1, current.col), // left neighbor
+                new Coordinate(current.row, current.col + 1), // top neigbhor
+                new Coordinate(current.row, current.col - 1) // bottom neighbor
+            };
+            for(Coordinate neighbor : neighbors) {
+                if(
+                    neighbor.col >= 0 && neighbor.col < COLS && neighbor.row >= 0 && neighbor.row < ROWS && //in bounds
+                    grid[neighbor.row][neighbor.col] == 1 && //is land
+                    visited[neighbor.row][neighbor.col] != 1 // is not already visited
+                ) {
+                    visited[neighbor.row][neighbor.col] = 1;
+                    queue.add(neighbor);
+                }
+            }
+        }
+        // use the visted matrix to find 1s that are not part of the border land and increment result.
+        // this will require 
+        for(int i = 1; i < ROWS - 1; i++ ) {
+            for(int j = 1; j < COLS - 1; j++){
+                if(visited[i][j] == 0 && grid[i][j] == 1) {
+                    result++;
+                }
+            }
+        }
+
+        return result;
+    }
 }
