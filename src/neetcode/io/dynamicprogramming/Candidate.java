@@ -1,4 +1,4 @@
-package neetcode.io.graphs;
+package neetcode.io.dynamicprogramming;
 
 class Candidate {
     public int i;
