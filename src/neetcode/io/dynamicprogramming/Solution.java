@@ -1,6 +1,8 @@
 package neetcode.io.dynamicprogramming;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Solution {
         public boolean wordBreak(String s, List<String> wordDict) {
@@ -19,5 +21,33 @@ public class Solution {
             }
         }
         return false;
+    }
+    public int findTargetSumWays(int[] nums, int target) {
+        if(nums.length == 1) {
+            if(Math.abs(target) == nums[0]) {
+                return 1;
+            }  else {
+                return 0;
+            }
+        }
+        Map<Candidate, Integer> map = new HashMap<>();
+        return findTargetSums(nums, 0, target, 0, map);
+    }
+    private int findTargetSums(int nums[], int i, int target, int sum, Map<Candidate, Integer> map) {
+        if(i == nums.length) {
+            if(target == sum)
+                return 1;
+            else
+                return 0;
+        } else { 
+            Candidate candidate = new Candidate(i, sum);
+            if(map.containsKey(candidate)) {
+                return map.get(candidate);
+            } else {
+                map.put(candidate, (findTargetSums(nums, i + 1, target, sum + nums[i], map) 
+                    + findTargetSums(nums, i + 1, target, sum - nums[i], map)));
+                return map.get(candidate);
+            }
+        }
     }
 }
