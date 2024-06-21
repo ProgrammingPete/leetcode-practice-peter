@@ -1,6 +1,8 @@
 package neetcode.io.arrays;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Solution {
     public int findKthLargest(int[] nums, int k) {
@@ -41,5 +43,32 @@ public class Solution {
         quickSort(arr, left + 1, e);
 
         return arr;
+    }
+
+    public boolean isAnagram(String s, String t) {
+        Map<Character, Integer> map = new HashMap<>();
+        if(s.length() != t.length()) return false;
+        for(int i = 0; i < s.length(); i++) {
+            if(map.containsKey(s.charAt(i))) {
+                if(map.get(s.charAt(i)) == -1) {
+                    map.remove(s.charAt(i));
+                } else {
+                    map.put(s.charAt(i), map.get(s.charAt(i)) + 1);
+                }
+            } else {
+                map.put(s.charAt(i), 1);
+            }
+            if(map.containsKey(t.charAt(i))) {
+                if(map.get(t.charAt(i)) == 1) {
+                    map.remove(t.charAt(i));
+                } else {
+                    map.put(t.charAt(i), map.get(t.charAt(i)) - 1);
+                }
+            } else {
+                map.put(t.charAt(i), -1);
+            }
+
+        }
+        return map.isEmpty();
     }
 }

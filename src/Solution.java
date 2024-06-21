@@ -1,16 +1,65 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Formatter;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.function.Predicate;
 
 public class Solution {
-    public static void main(String[] args) throws Exception {
-		Solution sol = new Solution();
-		// int maxSum = sol.longestConsecutive(new int[]{100,4,200,1,3,2});
-		// System.out.println(maxSum);
-		System.out.println(sol.findTargetSumWays(new int[]{1,1,1,1,1}, 3));
-		System.out.println(sol.findTargetSumWays(new int[]{1000}, -1000));
+ 	 public static void main(String[] args) throws Exception {
+		// Solution sol = new Solution();
+		// // int maxSum = sol.longestConsecutive(new int[]{100,4,200,1,3,2});
+		// // System.out.println(maxSum);
+		// System.out.println(sol.findTargetSumWays(new int[]{1,1,1,1,1}, 3));
+		// System.out.println(sol.findTargetSumWays(new int[]{1000}, -1000));
+	// 	    List<String> letters = new ArrayList(Arrays.asList("D","B","A","C","F","G"));
+    //    Predicate<String> p1 = s -> s.compareTo("C") > 0;
+    //    Predicate<String> p2 = s -> s.equals("B");
+    //    letters.removeIf(p1.negate().or(p2));
+    //    letters.sort((s1,s2) -> s1.compareTo(s2));
+    //    System.out.println(letters);
+	   String stringA = "A";
+	   String stringB = "B";
+	   String stringnull = null;
+			 StringBuilder bufferc = new StringBuilder("C");
+	   Formatter fmt = new Formatter(bufferc);
+
+	   fmt.format("%s%s", stringA, stringB);
+	   System.out.println("Line 1: "+ fmt);
+
+	   fmt.format("%-2s", stringB);
+	   System.out.println("Line 2: "+ fmt);
+
+	   fmt.format("%b", stringnull);
+	   System.out.println("Line 3: "+ fmt);
+
+	   List<String> list = new ArrayList<String>();
+	   list.add("1");
+	   list.add("2");
+	   list.add(0,"3");
+	   list.add(1,"4");
+	   list.forEach(System.out::println);
+		
+	   Runnable r = () -> System.out.println("HI");
+	   new Thread(r).start();
 	}
 	
-
+	class BaseLogger {
+		private static BaseLogger log = new BaseLogger();
+		private BaseLogger() {}
+		public synchronized static BaseLogger getInstance() {
+			return log;
+		}
+		private StringBuilder logMessage = new StringBuilder();
+		public void addLog(String logMessage) {
+			this.logMessage.append(logMessage + "|");
+			//Logic to write log into file.
+		}
+		public void printLog() {
+			System.out.println(logMessage.toString());//To print log.
+		}
+	}
 	
 	/**
 	 * Largest Sum Contiguous Subarray - 
