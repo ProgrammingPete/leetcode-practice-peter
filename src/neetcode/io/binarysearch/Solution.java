@@ -15,36 +15,36 @@ public class Solution extends GuessGame {
         for(int pile : piles) {
             max = Math.max(pile, max);
         }
-        if(h == piles.length) {
-            return max;
+
+        int low = 1;
+        int high = max;
+        int res = max;
+
+        while(low <= high) {
+            int mid = (low + high) >>> 1; // >>> 1  shifts bit to the right
+            if(canCompletePiles(piles, h, mid)) {
+                high = mid - 1;
+                res = mid;
+            } else {
+                low = mid + 1;
+            }
         }
-        // i will try to implement the brute force solution at first.. this is the brute
-        for(int k = 1; k <= max; k++) {
-            if(isPossible(piles, h, k)) return k;
-        }
-        return max;
+
+        // // i will try to implement the brute force solution at first.. this is the brute
+        // for(int k = 1; k <= max; k++) {
+        //     if(canCompletePiles(piles, h, k)) return k;
+        // }
+        return res;
     }
 
-    private boolean isPossible(int[] piles, int h, int k) {
-        int remaininghours = h;
-        for(int i = 0; i < piles.length; i++) {
-            int currentPile = piles[i];
-            while(currentPile > 0) {
-                currentPile -= k;
-                remaininghours--;
-                if(remaininghours == 0) break;
-            }
-            if(remaininghours == 0) {
-                if(currentPile > 0 || i != (piles.length - 1) ) {
-                    break;
-                }
-                if(i == (piles.length - 1) && currentPile <= 0) {
-                    return true;
-                }
-            }
+    private boolean canCompletePiles(int[] piles, int h, int k) {
+        if(k == 0) return false;
+        int pileIndex = 0;
+        while(h >= 0  && pileIndex < piles.length) {
+            h -= Math.ceil((double)piles[pileIndex] / k);
+            pileIndex++;
         }
-        if(remaininghours > 0) return true; // smallest integer
-        return false;
+        return h >= 0 && pileIndex >= piles.length;
     }
     public int guessNumber(int n) { // use binary search
         return binarySearchRange(1, n);
