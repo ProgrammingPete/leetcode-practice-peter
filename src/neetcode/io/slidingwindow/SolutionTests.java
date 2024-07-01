@@ -1,4 +1,4 @@
-package medium.slidingwindow;
+package neetcode.io.slidingwindow;
 
 import static org.junit.Assert.assertEquals;
 

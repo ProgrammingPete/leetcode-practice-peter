@@ -71,4 +71,46 @@ public class Solution {
         }
         return map.isEmpty();
     }
+    public int[] findDiagonalOrder(int[][] mat) {
+        // Check for empty matrices
+        if (mat == null || mat.length == 0) {
+            return new int[0];
+        }
+        int m = mat.length;
+        int n = mat[0].length;
+
+        int row = 0, column = 0;
+
+        int[] result = new int[m*n];
+        int r = 0;
+        boolean up = true;
+        while(row < m && column < n) {
+            if (up) {
+                while(row >= 0 && column < n) {
+                    result[r++] = mat[row][column];
+                    row--;
+                    column++;
+                }
+                row++;
+                if(column == n) {
+                    row++;
+                    column--;
+                }
+                up = false;
+            } else {
+                while(column >= 0 && row < m) {
+                    result[r++] = mat[row][column];
+                    row++;
+                    column--;
+                }
+                column++;
+                if(row == m) {
+                    row--;
+                    column++;
+                }
+                up = true;
+            }
+        }
+        return result;
+    }
 }
