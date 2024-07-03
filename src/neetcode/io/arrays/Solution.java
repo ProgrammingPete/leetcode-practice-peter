@@ -1,7 +1,9 @@
 package neetcode.io.arrays;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Solution {
@@ -110,6 +112,82 @@ public class Solution {
                 }
                 up = true;
             }
+        }
+        return result;
+    }
+    public List<Integer> spiralOrder(int[][] matrix) {
+        int m = matrix.length;
+        int n = matrix[0].length;
+        boolean[][] visited = new boolean[m][n];
+       
+       // create circular linked list with Nodes
+        Node[] directions = new Node[] { 
+            new Node("right"),
+            new Node("down"),
+            new Node("left"),
+            new Node("up")
+        };
+        for(int i = 0; i < directions.length; i++) {
+            if(i + 1 == directions.length) {
+                directions[i].next = directions[0];
+            } else {
+                directions[i].next = directions[i + 1];
+            }
+        }
+
+        List<Integer> result = new ArrayList<>();
+        int i = 0, j = 0;
+
+        Node currentDirection = directions[0];
+        while(result.size() < m*n) {
+            if(!visited[i][j]) {
+                result.add(matrix[i][j]);
+                visited[i][j] = true;
+            } 
+
+
+            if(currentDirection.direction.equals("right") && j + 1 < n && visited[i][j + 1] == false) {
+                j++;
+            } else if(currentDirection.direction.equals("right") && (j + 1 >= n || visited[i][j + 1] == true)) {
+                currentDirection = currentDirection.next;
+            } else if(currentDirection.direction.equals("down")  && i + 1 < m && visited[i+1][j] == false) {
+                i++;
+            } else if(currentDirection.direction.equals("down")  && (i + 1 >= m || visited[i+1][j] == true)) {
+                currentDirection = currentDirection.next;
+            } else if(currentDirection.direction.equals("left")  && j - 1 >= 0 && visited[i][j - 1] == false) {
+                j--;
+            } else if(currentDirection.direction.equals("left")  && (j - 1 < 0 || visited[i][j - 1] == true)) {
+                currentDirection = currentDirection.next;
+            } else if(currentDirection.direction.equals("up")    && i - 1 >= 0 && visited[i - 1][j] == false) {
+                i--;
+            } else if(currentDirection.direction.equals("up")    && (i - 1 <= 0 || visited[i - 1][j] == true)) {
+                currentDirection = currentDirection.next;
+            }
+        }
+
+        return result;
+    }
+
+    public List<List<Integer>> generate(int numRows) {
+        List<List<Integer>> result = new ArrayList<>();
+        result.add(List.of(1));
+        if(numRows == 1) return result;
+        result.add(List.of(1,1));
+        if(numRows == 2) return result;
+
+        for(int i = 3; i <= numRows; i++) {
+            List<Integer> row = new ArrayList<>();
+            row.add(1);
+            List<Integer> prevRow = result.get(i - 2);
+            for(int j = 1; j < i; j++) {
+                if(j == i - 1) {
+                    row.add(1);
+                } else {
+                    int val = prevRow.get(j - 1) + prevRow.get(j);
+                    row.add(val);
+                }
+            }
+            result.add(row);
         }
         return result;
     }
