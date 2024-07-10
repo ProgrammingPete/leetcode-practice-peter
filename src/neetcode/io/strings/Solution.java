@@ -77,29 +77,17 @@ public class Solution {
 
     
     public int strStr(String haystack, String needle) {
-        if(needle.length() > haystack.length()) return -1;
         char[] chars1 = haystack.toCharArray();
         char[] chars2 = needle.toCharArray();
-        int j = 0, start = -1;
-        for(int i = 0, x = 0; i < chars1.length; i++, x++) {
-            while(x < chars1.length && chars1[x] == chars2[j]) {
-                if(j == 0){
-                    start = Integer.valueOf(i);
+
+        for(int windowLength = 0; windowLength <= chars1.length - chars2.length; windowLength++) { // range checks if there are enough chars left for thte neddle,  if not no need to continue
+            for(int i = 0; i < chars2.length; i++) {
+                if(chars1[windowLength + i] != chars2[i]) {
+                    break;
                 }
-                if(j == chars2.length - 1) {
-                    return start;
-                }
-                j++;
-                x++;
+                if(i == chars2.length - 1) return windowLength;
             }
-            if(x > i) { // reset x
-                x = i;
-            }
-            if(start > -1) // reset start 
-                start = -1;
-            if(j > 0) // reset j
-                j = 0;
         }
-        return start;
+        return -1;
     }
 }

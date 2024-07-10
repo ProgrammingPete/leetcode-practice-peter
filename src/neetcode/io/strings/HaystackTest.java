@@ -41,4 +41,10 @@ public class HaystackTest {
         String needle = "issipi";
         Assertions.assertEquals(-1, sol.strStr(haystack, needle));
     }
+    @Test
+    void testStrStr_test7() {
+        String haystack = "a";
+        String needle = "a";
+        Assertions.assertEquals(0, sol.strStr(haystack, needle));
+    }
 }
