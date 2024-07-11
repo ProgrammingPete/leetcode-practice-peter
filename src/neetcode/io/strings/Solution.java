@@ -1,5 +1,13 @@
 package neetcode.io.strings;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+
 public class Solution {
     public String addBinary(String a, String b) {
         char[] a_ = a.toCharArray();
@@ -89,5 +97,55 @@ public class Solution {
             }
         }
         return -1;
+    }
+
+    public String[][] wordCountEngine(String document) {
+        // sort entries in map in descending order, create a comparator that will do this for us
+        Map<String, Integer> map = new HashMap<String, Integer>(); // use a tree map that will store the values, and pass in the comparator
+        StringBuilder curr = new StringBuilder();
+        char[] chars = document.toCharArray();
+        for(int i = 0; i < chars.length; i++) {
+            if(Character.isLetter(chars[i])) {
+                curr.append(Character.toLowerCase(chars[i]));
+            } else if(Character.isWhitespace(chars[i])) {
+                if(!Character.isWhitespace(chars[i - 1])) {
+                    if(!map.containsKey(curr.toString())) {
+                        map.put(curr.toString(), 1);
+                    } else {
+                        map.put(curr.toString(), map.get(curr.toString()) + 1); 
+                    }
+                    curr = new StringBuilder();
+                }
+            }
+        }
+
+
+
+        // append last word to map
+        if(curr.length() > 0) {
+                if(!map.containsKey(curr.toString())) {
+                    map.put(curr.toString(), 1);
+                } else {
+                    map.put(curr.toString(), map.get(curr.toString()) + 1); 
+                }
+        }
+
+        // sort map entrys 
+        List<Map.Entry<String, Integer>> list = new ArrayList<>(map.entrySet());
+        Comparator<Map.Entry<String, Integer>> comp = (entry1, entry2) -> entry2.getValue().compareTo(entry1.getValue());
+        Collections.sort(list, comp);
+
+
+        String[][] res = new String[map.size()][];
+        int r = 0;
+        for(Map.Entry<String, Integer> entry : map.entrySet()) {
+            String[] curr2 = new String[2];
+            curr2[0] = entry.getKey();
+            curr2[1] = Integer.toString(entry.getValue());
+            res[r] = curr2;
+            r++;
+        }
+
+        return res;
     }
 }
