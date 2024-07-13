@@ -3,8 +3,11 @@ package neetcode.io.arrays;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class Solution {
     public int findKthLargest(int[] nums, int k) {
@@ -189,6 +192,29 @@ public class Solution {
             }
             result.add(row);
         }
+        return result;
+    }
+
+    public List<List<Integer>> findDifference(int[] nums1, int[] nums2) {
+        Set<Integer> uniqueNums1 = new HashSet<>();
+        Set<Integer> uniqueNums2 = new HashSet<>();
+
+        for(int num : nums1) {
+            uniqueNums1.add(num);
+        }
+
+        for(int num : nums2) {
+            uniqueNums2.add(num);
+        }
+        
+        Set<Integer> temp = new TreeSet<>(uniqueNums1);
+        uniqueNums1.removeAll(uniqueNums2);
+        uniqueNums2.removeAll(temp);
+        
+
+        List<List<Integer>> result = new ArrayList<>();
+        result.add(new ArrayList<>(uniqueNums1));
+        result.add(new ArrayList<>(uniqueNums2));
         return result;
     }
 }

@@ -6,7 +6,6 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 
 public class Solution {
     public String addBinary(String a, String b) {
@@ -134,7 +133,6 @@ public class Solution {
         List<Map.Entry<String, Integer>> list = new ArrayList<>(map.entrySet());
         Comparator<Map.Entry<String, Integer>> comp = (entry1, entry2) -> entry2.getValue().compareTo(entry1.getValue());
         Collections.sort(list, comp);
-
 
         String[][] res = new String[map.size()][];
         int r = 0;
