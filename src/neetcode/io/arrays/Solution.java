@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 public class Solution {
     public int findKthLargest(int[] nums, int k) {
@@ -196,18 +197,10 @@ public class Solution {
     }
 
     public List<List<Integer>> findDifference(int[] nums1, int[] nums2) {
-        Set<Integer> uniqueNums1 = new HashSet<>();
-        Set<Integer> uniqueNums2 = new HashSet<>();
+        Set<Integer> uniqueNums1 = Arrays.stream(nums1).boxed().collect(Collectors.toSet());
+        Set<Integer> uniqueNums2 = Arrays.stream(nums2).boxed().collect(Collectors.toSet());
 
-        for(int num : nums1) {
-            uniqueNums1.add(num);
-        }
-
-        for(int num : nums2) {
-            uniqueNums2.add(num);
-        }
-        
-        Set<Integer> temp = new TreeSet<>(uniqueNums1);
+        Set<Integer> temp = new HashSet<>(uniqueNums1);
         uniqueNums1.removeAll(uniqueNums2);
         uniqueNums2.removeAll(temp);
         
