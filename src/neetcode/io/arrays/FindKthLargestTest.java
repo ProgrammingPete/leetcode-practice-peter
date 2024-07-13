@@ -66,7 +66,7 @@ public class FindKthLargestTest {
     private String getTestInput(String name) throws IOException {
         String OS = System.getProperty("os.name").toLowerCase();
         String userDir = System.getProperty("user.home");
-        String rel = "/onedrive/OneDrive/git_projects/java_projects/leetcode/src/resources/"; //DONT CHANGE PATH OF RELATIVE FILE
+        String rel = "/git_projects/leetcode-practice-peter/src/resources/"; //DONT CHANGE PATH OF RELATIVE FILE
         if(OS.indexOf("win") >= 0) {
             rel = rel.replace("/", "\\");
             rel = rel.replace("onedrive", "OneDrive Personal");

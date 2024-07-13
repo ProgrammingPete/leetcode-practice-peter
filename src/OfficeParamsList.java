@@ -26,7 +26,7 @@ import java.util.function.Supplier;
                        System.out.println(t);
                    }
              }         
-             public static void main(String[] args){
+        public static void main(String[] args){
                    print("My", "Test");
                    print(new Employee<Integer,String>(1,"One"), new Employee<Integer,String>(2,"Two"));         
            }    
