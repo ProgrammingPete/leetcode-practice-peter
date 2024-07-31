@@ -3,6 +3,12 @@ package neetcode.io.graphs;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
+
+
 import org.junit.jupiter.api.Test;
 
 /**
@@ -63,6 +69,17 @@ public class CourseSchedule2Test {
         int[][] prerequisites = new int[][] {
             {1,0},{2,0},{3,1},{3,2}
         };
+        Arrays.asList(prerequisites).stream().filter(e -> e[0] == 1).toList();
+        System.out.println(Arrays.deepToString(prerequisites));
+        List<String> list = new ArrayList<>();
+        list.add("A");
+        list.add("B");
+        list.add("C");
+
+        Iterator<String> it = list.iterator();
+        it.next();
+        it.remove();
+        System.out.println(list);
         int[] expected = new int[] {0,2,1,3};
         assertArrayEquals(expected, sol.findOrder(4, prerequisites));
     }

@@ -1,9 +1,13 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Formatter;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
+import java.util.function.Function;
 import java.util.function.Predicate;
 
 public class Solution {
@@ -189,4 +193,54 @@ Constraints:
         }
     }
 
+}
+
+class FormatTest{
+    public static void main(String[] args) {
+        // String stringA = "A";
+        // String stringB = "B";
+        // String stringnull = null;
+        //       StringBuilder bufferc = new StringBuilder("C");
+        // Formatter fmt = new Formatter(bufferc);
+
+        // fmt.format("%s%s", stringA, stringB);
+        // System.out.println("Line 1: "+ fmt);
+
+        // fmt.format("%-2s", stringB);
+        // System.out.println("Line 2: "+ fmt);
+
+        // fmt.format("%b", stringnull);
+
+        // System.out.println("Line 3: "+ fmt);
+
+
+
+		// List<String> letters = new ArrayList(Arrays.asList("D","B","A","C","F","G"));
+		// Predicate<String> p1 = s -> s.compareTo("C") > 0;
+		// Predicate<String> p2 = s -> s.equals("B");
+		// letters.removeIf(p1.negate().or(p2));
+		// letters.sort((s1,s2) -> s1.compareTo(s2));
+		// System.out.println(letters);
+
+
+		// 		Long l = new Long(1234);
+		// Long l1 = l;
+		// if(l==l1)
+		// System.out.println("Equal Objects");
+		// else
+		// System.out.println("Not Equal Objects");
+		// l++;
+		// if(l==l1)
+		// System.out.println("Equal Objects");
+		// else
+		// System.out.println("Not Equal Objects");
+
+		Predicate<String> lengther = (s) -> s.length() < 2;
+        Predicate<String> equalizer = Predicate.isEqual("car");
+        Function<Boolean,String> booleaner = i -> Boolean.toString(i);
+        Function<String,Boolean> stringer  = s -> Boolean.parseBoolean(s);
+
+		System.out.println(booleaner.compose(stringer).apply("true"));
+		System.out.println(stringer.compose(booleaner).apply(true));
+    }
 }
