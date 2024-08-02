@@ -1,6 +1,7 @@
 package neetcode.io.strings;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -145,5 +146,33 @@ public class Solution {
         }
 
         return res;
+    }
+
+    public List<List<String>> groupAnagrams(String[] strs) {
+        Map<String, List<String>> map = new HashMap<>();
+        int[] charMap = new int[256]; // assuming lowercase ASCII chars only
+        for(String word : strs) {
+
+            // build key
+            char[] wordChars = word.toCharArray();
+            for(char c : wordChars) {
+                charMap[c]++;
+            }
+            StringBuilder key = new StringBuilder();
+            for(int c : charMap) {
+                key.append("#");
+                key.append(c);
+
+            }
+
+            // add key to map
+            if(!map.containsKey(key.toString())) {
+                map.put(key.toString(), new ArrayList<>());
+            }
+            map.get(key.toString()).add(word);
+            charMap = new int[256];
+        }
+
+        return new ArrayList<>(map.values());
     }
 }

@@ -73,7 +73,7 @@ public class Solution {
                 pq.offer(maxEntry); // add back the maxEntry since we popped it earlier
             }
         }
-        return new String(result); 
+        return result.toString(); 
     }
 
     private void addToResultAndUpdateCount(StringBuilder result, Queue<Map.Entry<Character, Integer>> pq,
