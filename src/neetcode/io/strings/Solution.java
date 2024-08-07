@@ -164,7 +164,7 @@ public class Solution {
                 key.append(c);
 
             }
-
+            word.substring(0, 0);
             // add key to map
             if(!map.containsKey(key.toString())) {
                 map.put(key.toString(), new ArrayList<>());
@@ -174,5 +174,62 @@ public class Solution {
         }
 
         return new ArrayList<>(map.values());
+    }
+    public String minWindow(String s, String t) {
+        // populate hashmap
+        Map<Character, Integer> tMap = new HashMap<>();
+        for(char c : t.toCharArray()) {
+            int count = tMap.getOrDefault(c, 0);
+            tMap.put(c, count + 1);
+        }
+
+        // number of chars in t, which need to be present in the desired window
+        int required = t.length();
+
+        int L = 0; 
+        int R = 0;
+
+        int beginningofWindow = 0;
+        int endOfWindow = 0;
+        int minLength = 0; 
+
+        char[] sChars = s.toCharArray();
+        while(R < s.length()) {
+            if(tMap.containsKey(sChars[R]) && tMap.get(sChars[R]) != 0) {
+                required--;
+                tMap.put(sChars[R], tMap.get(sChars[R]) - 1);
+            }
+            if(required == 0) {
+                if(minLength == 0) {
+                    minLength = R - L + 1;
+                    beginningofWindow = L;
+                    endOfWindow = R;
+                } else {
+                    if(minLength > R - L + 1 ) {
+                        minLength = R - L + 1;
+                        beginningofWindow = L;
+                        endOfWindow = R;
+                    }
+                }
+                
+                while(L < R) {
+                    if(tMap.containsKey(sChars[L])) {
+                        tMap.put(sChars[L], tMap.get(sChars[L]) + 1);
+                        L++;
+                        required++;
+                        break;
+                    } else {
+                        L++;
+                        if(minLength > R - L + 1 ) {
+                            minLength = R - L + 1;
+                            beginningofWindow = L;
+                            endOfWindow = R;
+                        }
+                    }
+                }
+            }
+            R++;
+        } 
+        return minLength == 0 ? "" : s.substring(beginningofWindow , endOfWindow + 1);
     }
 }
