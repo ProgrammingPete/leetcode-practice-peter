@@ -2,6 +2,7 @@ package neetcode.io.arrays;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -209,6 +210,51 @@ public class Solution {
         List<List<Integer>> result = new ArrayList<>();
         result.add(new ArrayList<>(uniqueNums1));
         result.add(new ArrayList<>(uniqueNums2));
+        Collections.copy(null, null);
         return result;
     }
+
+    public int[] sortKMessedArray(int[] arr, int k) {
+        // insertion sort
+        for(int i = 1, j = i - 1; i < arr.length; i++, j = i - 1) {
+            while(j >= 0 && arr[j+1] < arr[j]) {
+                int temp = arr[j];
+                arr[j] = arr[j+1];
+                arr[j + 1] = temp;
+                j--;
+            }
+        }
+        return arr;
+    }
+    public List<List<Pair>> insertionSort(List<Pair> pairs) {
+        List<List<Pair>> result = new ArrayList<>();
+        if(pairs.isEmpty()) return result; //edge case for empty array
+
+        addToResult(result, pairs); // add inital state of pairs
+
+
+        int j = 0;
+        for(int i = 1; i < pairs.size(); i++) {
+            j = i - 1;
+            while(j >= 0 && pairs.get(j+1).key < pairs.get(j).key) { // swap when the next value is less than the previous value
+                Pair temp = pairs.get(j);
+                pairs.set(j, pairs.get(j + 1));
+                pairs.set(j + 1, temp);
+                // decrement by one and then check if this is sorted
+                j--;
+            }
+            // take snapshot after each insertion
+            addToResult(result, pairs);
+        }
+        return result;
+    }
+
+    private void addToResult(List<List<Pair>> result, List<Pair> state) {
+            List<Pair> snapshot = new ArrayList<>();
+            for(Pair pair : state) {
+                snapshot.add(pair); 
+            }
+            result.add(snapshot);
+    }
+
 }
