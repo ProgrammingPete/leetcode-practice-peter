@@ -232,8 +232,7 @@ public class Solution {
         // alternate way of completing the program
         // we can create a min heap (min Priority Queue) and add k + 1 elements to it. 
         // we then pop and add one element to the heap, adding the popped element back to the original array
-        
-        Queue<Integer> pq = new PriorityQueue<>((a, b) -> Integer.compare(b,a));
+        Queue<Integer> pq = new PriorityQueue<>((a, b) -> Integer.compare(a,b));
         for(int i = 0; i <= Math.min(arr.length - 1, k); i++) { // math min is required if k > arr.length
             pq.offer(arr[i]);
         }
