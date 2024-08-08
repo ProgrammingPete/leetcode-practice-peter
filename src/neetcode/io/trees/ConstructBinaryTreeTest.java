@@ -1,6 +1,5 @@
 package neetcode.io.trees;
 
-import static org.junit.Assert.assertEquals;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;

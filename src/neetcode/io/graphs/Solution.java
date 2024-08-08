@@ -138,22 +138,22 @@ public class Solution {
     }
 
     private boolean courseFinishDfs(int i, Set<Integer> visited, Set<Integer> path, Map<Integer, List<Integer>> adjList) {
-                if(path.contains(i)) {
-                    return false;
-                }
-                if(visited.contains(i)){
-                    return true;
-                }
-                visited.add(i);
-                path.add(i);
-                
-                for(int neighbor : adjList.get(i)) {
-                    if(!courseFinishDfs(neighbor, visited, path, adjList)) return false;
-                }
+        if(path.contains(i)) {
+            return false;
+        }
+        if(visited.contains(i)){
+            return true;
+        }
+        visited.add(i);
+        path.add(i);
+        
+        for(int neighbor : adjList.get(i)) {
+            if(!courseFinishDfs(neighbor, visited, path, adjList)) return false;
+        }
 
-                path.remove(i);
-                // add to the topological sort here
-                return true;
+        path.remove(i);
+        // add to the topological sort here
+        return true;
     }
 
     public int[] findOrder(int numCourses, int[][] prerequisites) {

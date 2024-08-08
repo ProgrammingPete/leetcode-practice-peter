@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.PriorityQueue;
+import java.util.Queue;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -216,13 +218,36 @@ public class Solution {
 
     public int[] sortKMessedArray(int[] arr, int k) {
         // insertion sort
-        for(int i = 1, j = i - 1; i < arr.length; i++, j = i - 1) {
-            while(j >= 0 && arr[j+1] < arr[j]) {
-                int temp = arr[j];
-                arr[j] = arr[j+1];
-                arr[j + 1] = temp;
-                j--;
-            }
+        // for(int i = 1, j = i - 1; i < arr.length; i++, j = i - 1) {
+        //     while(j >= 0 && arr[j+1] < arr[j]) {
+        //         //execute swap
+        //         int temp = arr[j];
+        //         arr[j] = arr[j+1];
+        //         arr[j + 1] = temp;
+
+        //         j--;
+        //     }
+        // }
+
+        // alternate way of completing the program
+        // we can create a min heap (min Priority Queue) and add k + 1 elements to it. 
+        // we then pop and add one element to the heap, adding the popped element back to the original array
+        
+        Queue<Integer> pq = new PriorityQueue<>((a, b) -> Integer.compare(b,a));
+        for(int i = 0; i <= Math.min(arr.length - 1, k); i++) { // math min is required if k > arr.length
+            pq.offer(arr[i]);
+        }
+        int replaceIndex = 0; 
+
+        //iterate through the rest of the array
+        for(int i = k + 1; i < arr.length; i++) {
+            arr[replaceIndex++] = pq.poll();
+            pq.offer(arr[i]);
+        }
+
+        // pop the rest of the value in the heap until it is empty
+        while(!pq.isEmpty()) {
+            arr[replaceIndex++] = pq.poll();
         }
         return arr;
     }
